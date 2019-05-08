@@ -10,8 +10,8 @@ ets_cpp_client: Sample C++ client
 3. Create a ros2 worskpace: mkdir -p ros2_ws/src
 4. Clone the repo inside ros2_ws/src
 5. Source the ros2 environment setup script `source /opt/ros/crytal/setup.zsh
-6. From ros2_ws, build the project `colcon build --symlink-install`
-If you happen to get this error:
+6. From ros2_ws, build the project `colcon build --symlink-install`.
+  If you happen to get this error:
 ```
 --- stderr: ets_msgs                         
 CMake Error at /usr/share/cmake-3.10/Modules/FindPackageHandleStandardArgs.cmake:137 (message):
@@ -37,5 +37,7 @@ In case the game crashes, you may need to run:
 
 
 If you want to try `ros2 topic echo /truck`, you need to source the environment from the workspace to have the messages available:
-```source install/setup.zsh
-ros2 topic echo /truck```
+```
+source install/setup.zsh
+ros2 topic echo /truck
+```
