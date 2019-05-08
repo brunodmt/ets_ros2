@@ -211,7 +211,7 @@ SCSAPI_VOID telemetry_pause(const scs_event_t event, const void *const UNUSED(ev
 	print_header = true;
 }
 
-SCSAPI_VOID telemetry_configuration(const scs_event_t event, const void *const event_info, const scs_context_t UNUSED(context))
+SCSAPI_VOID telemetry_configuration(const scs_event_t UNUSED(event), const void *const event_info, const scs_context_t UNUSED(context))
 {
 	// Here we just print the configuration info.
 
@@ -320,7 +320,7 @@ SCSAPI_VOID telemetry_configuration(const scs_event_t event, const void *const e
 
 // Handling of individual channels.
 
-SCSAPI_VOID telemetry_store_orientation(const scs_string_t name, const scs_u32_t index, const scs_value_t *const value, const scs_context_t context)
+SCSAPI_VOID telemetry_store_orientation(const scs_string_t UNUSED(name), const scs_u32_t UNUSED(index), const scs_value_t *const value, const scs_context_t context)
 {
 	assert(context);
 	telemetry_state_t *const state = static_cast<telemetry_state_t *>(context);
@@ -341,7 +341,7 @@ SCSAPI_VOID telemetry_store_orientation(const scs_string_t name, const scs_u32_t
 	state->roll = value->value_euler.roll * 360.0f;
 }
 
-SCSAPI_VOID telemetry_store_float(const scs_string_t name, const scs_u32_t index, const scs_value_t *const value, const scs_context_t context)
+SCSAPI_VOID telemetry_store_float(const scs_string_t UNUSED(name), const scs_u32_t UNUSED(index), const scs_value_t *const value, const scs_context_t context)
 {
 	// The SCS_TELEMETRY_CHANNEL_FLAG_no_value flag was not provided during registration
 	// so this callback is only called when a valid value is available.
@@ -352,7 +352,7 @@ SCSAPI_VOID telemetry_store_float(const scs_string_t name, const scs_u32_t index
 	*static_cast<float *>(context) = value->value_float.value;
 }
 
-SCSAPI_VOID telemetry_store_s32(const scs_string_t name, const scs_u32_t index, const scs_value_t *const value, const scs_context_t context)
+SCSAPI_VOID telemetry_store_s32(const scs_string_t UNUSED(name), const scs_u32_t UNUSED(index), const scs_value_t *const value, const scs_context_t context)
 {
 	// The SCS_TELEMETRY_CHANNEL_FLAG_no_value flag was not provided during registration
 	// so this callback is only called when a valid value is available.
