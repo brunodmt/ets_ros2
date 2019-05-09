@@ -9,10 +9,11 @@ public:
 		publisher_ = this->create_publisher<ets_msgs::msg::Truck>("truck");
 	}
 
-	void sendOdometry(float speed, int gear)
+	void sendOdometry(float speed, float rpm, int gear)
 	{
 		auto message = ets_msgs::msg::Truck();
 		message.speed = speed;
+		message.rpm = rpm;
 		message.gear = gear;
 		publisher_->publish(message);
 	}

@@ -193,7 +193,7 @@ SCSAPI_VOID telemetry_frame_end(const scs_event_t UNUSED(event), const void *con
 	);
 
 	log_line("about to publish");
-	publisher->sendOdometry(telemetry.speed, telemetry.gear);
+	publisher->sendOdometry(telemetry.speed, telemetry.rpm, telemetry.gear);
 	log_line("about to spin");
 	rclcpp::spin_some(publisher);
 	log_line("spinned");
