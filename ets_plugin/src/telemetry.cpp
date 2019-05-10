@@ -72,6 +72,7 @@ struct telemetry_state_t
 	float	speed;
 	float	rpm;
 	int	gear;
+	bool	trailer_connected;
 
 } telemetry;
 
@@ -186,14 +187,15 @@ SCSAPI_VOID telemetry_frame_end(const scs_event_t UNUSED(event), const void *con
 		log_print(";---;---;---");
 	}
 	log_line(
-		";%f;%f;%d",
+		";%f;%f;%d;%d",
 		telemetry.speed,
 		telemetry.rpm,
-		telemetry.gear
+		telemetry.gear,
+		telemetry.trailer_connected
 	);
 
 	log_line("about to publish");
-	publisher->sendOdometry(telemetry.speed, telemetry.rpm, telemetry.gear);
+	publisher->sendOdometry(telemetry.speed, telemetry.rpm, telemetry.gear, telemetry.trailer_connected);
 	log_line("about to spin");
 	rclcpp::spin_some(publisher);
 	log_line("spinned");
@@ -363,6 +365,17 @@ SCSAPI_VOID telemetry_store_s32(const scs_string_t UNUSED(name), const scs_u32_t
 	*static_cast<int *>(context) = value->value_s32.value;
 }
 
+SCSAPI_VOID telemetry_store_bool(const scs_string_t UNUSED(name), const scs_u32_t UNUSED(index), const scs_value_t *const value, const scs_context_t context)
+{
+	// The SCS_TELEMETRY_CHANNEL_FLAG_no_value flag was not provided during registration
+	// so this callback is only called when a valid value is available.
+
+	assert(value);
+	assert(value->type == SCS_VALUE_TYPE_bool);
+	assert(context);
+	*static_cast<bool *>(context) = value->value_bool.value;
+}
+
 /**
  * @brief Telemetry API initialization function.
  *
@@ -465,6 +478,7 @@ SCSAPI_RESULT scs_telemetry_init(const scs_u32_t version, const scs_telemetry_in
 	version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_speed, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, telemetry_store_float, &telemetry.speed);
 	version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_engine_rpm, SCS_U32_NIL, SCS_VALUE_TYPE_float, SCS_TELEMETRY_CHANNEL_FLAG_none, telemetry_store_float, &telemetry.rpm);
 	version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_engine_gear, SCS_U32_NIL, SCS_VALUE_TYPE_s32, SCS_TELEMETRY_CHANNEL_FLAG_none, telemetry_store_s32, &telemetry.gear);
+	version_params->register_for_channel(SCS_TELEMETRY_TRAILER_CHANNEL_connected, SCS_U32_NIL, SCS_VALUE_TYPE_bool, SCS_TELEMETRY_CHANNEL_FLAG_none, telemetry_store_bool, &telemetry.trailer_connected);
 
 	// Remember the function we will use for logging.
 

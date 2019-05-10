@@ -3,7 +3,7 @@
 
 void callback(const ets_msgs::msg::Truck::SharedPtr msg)
 {
-  std::cout << "speed=" << msg->speed << " rpms=" << msg->rpm << " gear=" << msg->gear << std::endl;
+  std::cout << "speed=" << msg->speed << " rpm=" << msg->rpm << " gear=" << msg->gear << " trailer_connected=" << msg->trailer_connected << std::endl;
 }
 
 int main(int argc, char * argv[])
