@@ -1,4 +1,14 @@
 float64 speed
+float64 acc_x
+float64 acc_y
+float64 acc_z
 float64 rpm
 int32 gear
+bool engine_running
 bool trailer_connected
+float64 x
+float64 y
+float64 z
+float64 heading
+float64 pitch
+float64 roll
