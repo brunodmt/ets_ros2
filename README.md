@@ -31,11 +31,13 @@ Windows is not currently supported.
    run `export CMAKE_PREFIX_PATH=$AMENT_PREFIX_PATH:$CMAKE_PREFIX_PATH` and try again.
 5. Copy the generated plugin library to the ETS folder:
    ```
-   cp install/ets_plugin/lib/ets_plugin/libetsros2.so ~/.local/share/Steam/steamapps/common/Euro\ Truck\ Simulator\ 2/bin/linux_x64/plugins
+   mkdir  ~/.local/share/Steam/steamapps/common/Euro\ Truck\ Simulator\ 2/bin/linux_x64/plugins
+   cp install/ets_plugin/lib/ets_plugin/libetsros2.so ~/.local/share/Steam/steamapps/common/Euro\ Truck\ Simulator\ 2/bin/linux_x64/plugins/
    ```
    or the ATS folder:
    ```
-   cp install/ets_plugin/lib/ets_plugin/libetsros2.so ~/.local/share/Steam/steamapps/common/American\ Truck\ Simulator/bin/linux_x64/plugins
+   mkdir ~/.local/share/Steam/steamapps/common/American\ Truck\ Simulator/bin/linux_x64/plugins
+   cp install/ets_plugin/lib/ets_plugin/libetsros2.so ~/.local/share/Steam/steamapps/common/American\ Truck\ Simulator/bin/linux_x64/plugins/
    ```
 6. Source the generated environment setup script, selecting the extension based on your shell: `source install/setup.<shell>`
 7. Run the client with `./install/ets_cpp_client/bin/ets_cpp_client/ets_cpp_client`
