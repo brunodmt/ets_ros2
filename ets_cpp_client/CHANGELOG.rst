@@ -2,8 +2,8 @@
 Changelog for package ets_cpp_client
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.1 (2019-06-04)
+------------------
 * Add some more parameters
   Specifically acceleration, engine_running, world_placement (x,y,z,
   heading,pitch,roll)
