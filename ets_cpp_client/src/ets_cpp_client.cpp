@@ -8,7 +8,8 @@ void callback(const ets_msgs::msg::Truck::SharedPtr msg)
 	" gear=" << msg->gear << " engine_running=" << msg->engine_running <<
 	" trailer_connected=" << msg->trailer_connected << " position.x= " << msg->x <<
 	" position.y=" << msg->y << " position.z=" << msg->z << " heading=" << msg->heading <<
-	" pitch=" << msg->pitch << " roll=" << msg->roll << std::endl << std::endl;
+	" pitch=" << msg->pitch << " roll=" << msg->roll << " parking_brake=" <<
+        msg->parking_brake << std::endl << std::endl;
 }
 
 int main(int argc, char * argv[])

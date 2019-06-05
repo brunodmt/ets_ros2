@@ -76,6 +76,7 @@ struct telemetry_state_t
 	bool			engine_running;
 	bool			trailer_connected;
 	scs_value_dplacement_t	placement;
+	bool			parking_brake;
 
 } telemetry;
 
@@ -190,7 +191,7 @@ SCSAPI_VOID telemetry_frame_end(const scs_event_t UNUSED(event), const void *con
 		log_print(";---;---;---");
 	}
 	log_line(
-		";%f;%f;%f;%f;%f;%d;%d;%d;%f;%f;%f;%f;%f;%f",
+		";%f;%f;%f;%f;%f;%d;%d;%d;%f;%f;%f;%f;%f;%f;%f",
 		telemetry.speed,
 		telemetry.acc.x,
 		telemetry.acc.y,
@@ -204,7 +205,8 @@ SCSAPI_VOID telemetry_frame_end(const scs_event_t UNUSED(event), const void *con
 		telemetry.placement.position.z,
 		telemetry.placement.orientation.heading,
 		telemetry.placement.orientation.pitch,
-		telemetry.placement.orientation.roll
+		telemetry.placement.orientation.roll,
+		telemetry.parking_brake
 	);
 
 	log_line("about to publish");
@@ -213,7 +215,8 @@ SCSAPI_VOID telemetry_frame_end(const scs_event_t UNUSED(event), const void *con
 				telemetry.trailer_connected,
 				telemetry.placement.position.x, telemetry.placement.position.y,
 				telemetry.placement.position.z, telemetry.placement.orientation.heading*360.0f,
-				telemetry.placement.orientation.pitch*360.0f, telemetry.placement.orientation.roll*360.0f);
+				telemetry.placement.orientation.pitch*360.0f, telemetry.placement.orientation.roll*360.0f,
+				telemetry.parking_brake);
 	log_line("about to spin");
 	rclcpp::spin_some(publisher);
 	log_line("spinned");
@@ -525,7 +528,7 @@ SCSAPI_RESULT scs_telemetry_init(const scs_u32_t version, const scs_telemetry_in
 	version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_engine_gear, SCS_U32_NIL, SCS_VALUE_TYPE_s32, SCS_TELEMETRY_CHANNEL_FLAG_none, telemetry_store_s32, &telemetry.gear);
 	version_params->register_for_channel(SCS_TELEMETRY_TRAILER_CHANNEL_connected, SCS_U32_NIL, SCS_VALUE_TYPE_bool, SCS_TELEMETRY_CHANNEL_FLAG_none, telemetry_store_bool, &telemetry.trailer_connected);
 	version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_world_placement, SCS_U32_NIL, SCS_VALUE_TYPE_dplacement, SCS_TELEMETRY_CHANNEL_FLAG_none, telemetry_store_dplacement, &telemetry.placement);
-
+	version_params->register_for_channel(SCS_TELEMETRY_TRUCK_CHANNEL_parking_brake, SCS_U32_NIL, SCS_VALUE_TYPE_bool, SCS_TELEMETRY_CHANNEL_FLAG_none, telemetry_store_bool, &telemetry.parking_brake);
 	// Remember the function we will use for logging.
 
 	game_log = version_params->common.log;

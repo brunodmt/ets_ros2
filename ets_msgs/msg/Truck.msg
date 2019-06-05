@@ -12,3 +12,4 @@ float64 z
 float64 heading
 float64 pitch
 float64 roll
+bool parking_brake

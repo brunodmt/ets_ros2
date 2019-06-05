@@ -10,7 +10,8 @@ public:
 	}
 
 	void sendOdometry(float speed, float acc_x, float acc_y, float acc_z, float rpm, int gear, bool engine_running,
-			  bool trailer_connected, double x, double y, double z, double heading, double pitch, double roll)
+			  bool trailer_connected, double x, double y, double z, double heading, double pitch, double roll,
+			  bool parking_brake)
 	{
 		auto message = ets_msgs::msg::Truck();
 		message.speed = speed;
@@ -27,6 +28,7 @@ public:
 		message.heading = heading;
 		message.pitch = pitch;
 		message.roll = roll;
+		message.parking_brake = parking_brake;
 		publisher_->publish(message);
 	}
 
