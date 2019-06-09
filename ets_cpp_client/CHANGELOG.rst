@@ -2,6 +2,11 @@
 Changelog for package ets_cpp_client
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Add parking brake status
+* Contributors: Hernán Gonzalez
+
 0.1.1 (2019-06-04)
 ------------------
 * Add some more parameters
