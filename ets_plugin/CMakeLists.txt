@@ -16,7 +16,6 @@ find_package(rclcpp REQUIRED)
 find_package(rcutils)
 find_package(rosidl_typesupport_cpp REQUIRED)
 find_package(std_msgs REQUIRED)
-find_package(nav_msgs REQUIRED)
 find_package(ets_msgs REQUIRED)
 
 ament_export_dependencies(rosidl_default_runtime)
@@ -28,7 +27,6 @@ ament_target_dependencies(etsros2
     "rcutils"
     "rosidl_typesupport_cpp"
     "std_msgs"
-    "nav_msgs"
     "ets_msgs")
 
 target_include_directories(etsros2 PRIVATE external/scs_sdk_1_9/include)
