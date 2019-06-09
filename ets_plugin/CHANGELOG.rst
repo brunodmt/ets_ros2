@@ -2,8 +2,8 @@
 Changelog for package ets_plugin
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.2 (2019-06-09)
+------------------
 * Remove unused nav_msgs dependency
 * Add parking brake status
 * Contributors: Bruno Demartino, Hernán Gonzalez
